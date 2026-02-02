@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nebula Web Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+body{
+  background:radial-gradient(circle at top,#1b1f3b,#070a15);
+  color:#fff;
+  min-height:100vh;
+  overflow:hidden;
+}
+.nebula{
+  position:absolute;
+  inset:0;
+  background:url("https://i.imgur.com/8Km9tLL.png");
+  opacity:0.15;
+  animation: float 20s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-200px);}
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.card{
+  width:420px;
+  padding:30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 40px rgba(0,255,255,0.15);
+  text-align:center;
+}
+
+h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:26px;
+  color:#00f7ff;
+  margin-bottom:10px;
+}
+p{
+  font-size:14px;
+  opacity:0.8;
+  margin-bottom:20px;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:10px;
+  background:rgba(0,0,0,0.4);
+  color:#fff;
+  outline:none;
+}
+
+button{
+  margin-top:15px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(90deg,#00f7ff,#7f00ff);
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #00f7ff;
+}
+
+.loader{
+  display:none;
+}
+.progress{
+  height:8px;
+  background:#111;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:20px;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00f7ff,#7f00ff);
+}
+
+.preview{
+  display:none;
+}
+.preview h2{
+  font-family:'Orbitron',sans-serif;
+  margin-bottom:10px;
+}
+.whatsapp{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 20px;
+  background:#25D366;
+  color:#000;
+  border-radius:25px;
+  text-decoration:none;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="nebula"></div>
+
+<div class="container">
+<div class="card">
+
+<!-- FORM -->
+<div id="form">
+<h1>⚡ Nebula Web Generator</h1>
+<p>Build your business website in 60 seconds</p>
+
+<input type="text" id="name" placeholder="Business Name">
+<select id="type">
+  <option>LIC Agent</option>
+  <option>Gym</option>
+  <option>Restaurant</option>
+  <option>Startup</option>
+  <option>Personal Brand</option>
+</select>
+<select id="theme">
+  <option>Dark Premium</option>
+  <option>Neon Futuristic</option>
+  <option>Light Clean</option>
+</select>
+
+<button onclick="generate()">Generate Website</button>
+</div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+<h1>🤖 Generating...</h1>
+<p id="status">Analyzing business...</p>
+<div class="progress"><div class="bar" id="bar"></div></div>
+</div>
+
+<!-- PREVIEW -->
+<div class="preview" id="preview">
+<h2>🚀 Website Preview Ready</h2>
+<p>This is a demo AI-generated layout.</p>
+<p><b>Want this LIVE for your business?</b></p>
+<a class="whatsapp" href="https://wa.me/919305893662?text=Hi%20I%20just%20generated%20a%20demo%20website%20using%20Nebula%20Generator" target="_blank">
+
+📲 WhatsApp Me
+</a>
+</div>
+
+</div>
+</div>
+
+<script>
+function generate(){
+  document.getElementById("form").style.display="none";
+  document.getElementById("loader").style.display="block";
+
+  let bar=document.getElementById("bar");
+  let status=document.getElementById("status");
+  let texts=[
+    "Analyzing business...",
+    "Designing layout...",
+    "Applying premium UI...",
+    "Optimizing for mobile...",
+    "Almost done..."
+  ];
+
+  let i=0;
+  let progress=0;
+
+  let interval=setInterval(()=>{
+    progress+=2;
+    bar.style.width=progress+"%";
+
+    if(progress%20===0 && i<texts.length){
+      status.innerText=texts[i];
+      i++;
+    }
+
+    if(progress>=100){
+      clearInterval(interval);
+      document.getElementById("loader").style.display="none";
+      document.getElementById("preview").style.display="block";
+    }
+  },100);
+}
+</script>
+
+</body>
+</html>
